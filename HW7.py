@@ -1,8 +1,8 @@
 
-# Your name:
-# Your student id:
-# Your email:
-# List who you have worked with on this project:
+# Your name: Selena Wang
+# Your student id: 27901898
+# Your email: selenaw@umich.edu
+# List who you have worked with on this project: N/A
 
 import unittest
 import sqlite3
@@ -53,7 +53,19 @@ def make_positions_table(data, cur, conn):
 #     created for you -- see make_positions_table above for details.
 
 def make_players_table(data, cur, conn):
-    pass
+    cur.execute('DROP TABLE Players')
+    cur.execute('CREATE TABLE Players (id INTEGER PRIMARY KEY, name TEXT, position_id INTEGER, birthyear INTEGER, nationality TEXT)')
+    cur.execute('SELECT id, position FROM Positions')
+    string = 'INSERT INTO Players (id, name, position_id, birthyear, nationality) VALUES (?,?,?,?,?)'
+
+    d = {}
+    for c in cur:
+        d[c[1]] = c[0]
+
+    for person in data['squad']:
+        cur.execute(string, (int(person['id']), person['name'], int(d[person['position']]), int(person['dateOfBirth'][:4]), person['nationality']))
+
+    conn.commit()
 
 ## [TASK 2]: 10 points
 # Finish the function nationality_search
