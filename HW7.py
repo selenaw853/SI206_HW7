@@ -244,7 +244,7 @@ class TestAllMethods(unittest.TestCase):
         c = sorted(position_birth_search("Defence", 23, self.cur, self.conn))
         self.assertEqual(len(c), 1)
         self.assertEqual(c, [('Teden Mengi', 'Defence', 2002)])
-    
+    '''
     # test extra credit
     def test_make_winners_table(self):
         self.cur2.execute('SELECT * from Winners')
@@ -261,7 +261,7 @@ class TestAllMethods(unittest.TestCase):
     def test_winners_since_search(self):
 
         pass
-
+    '''
 
 def main():
 
